@@ -1,19 +1,21 @@
 package net.Elerion.AEnix.Actors;
 
 import net.Elerion.AEnix.Conf;
+import net.Elerion.AEnix.tick;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Vector2f;
 
 
-public class Player {
+public class Player extends Actor {
 	public int Width;
 	public int Height;
 	public boolean outOfBounds;
 	public Rectangle Elm;
 	public Color Clr;
 	public Ghost ghost;
+
 	
 	
 	public Player( Vector2f startPos, int sizeX, int sizeY, Color startColor ){
@@ -21,10 +23,12 @@ public class Player {
 		this.Height 		= sizeY;
 		this.outOfBounds 	= false;
 		this.Clr			= startColor;
+		this.turnsPerTick	= 1;
+		this.turns			= this.turnsPerTick;
 		this.Elm 			= new Rectangle( startPos.x, startPos.y, sizeX, sizeY );
-		
 		this.ghost 			= new Ghost( this );
 		
+		tick.regAsActor( this );
 	}
 
 	
@@ -32,6 +36,7 @@ public class Player {
 	//|	MOVEMENT	*
 	//|**************
 	public Runnable moveUp( ){
+		if ( --turns <= 0 ) return null;
 		Player self = this;
 		return new Runnable( ){ public void run(){
 			self.setPos( self.getPos().x, self.getPos().y -16 );
@@ -39,6 +44,7 @@ public class Player {
 	}
 	
 	public Runnable moveDown( ){
+		if ( --turns <= 0 ) return null;
 		Player self = this;
 		return new Runnable( ){ public void run(){
 			self.setPos( self.getPos().x, self.getPos().y +16 );
@@ -46,6 +52,7 @@ public class Player {
 	}
 	
 	public Runnable moveLeft( ){
+		if ( --turns <= 0 ) return null;
 		Player self = this;
 		return new Runnable( ){ public void run(){
 			self.setPos( self.getPos().x -16, self.getPos().y );
@@ -53,15 +60,11 @@ public class Player {
 	}
 	
 	public Runnable moveRight( ){
+		if ( --turns <= 0 ) return null;
 		Player self = this;
 		return new Runnable( ){ public void run(){
 			self.setPos( self.getPos().x +16, self.getPos().y );
 		}; };
-	}
-	
-	
-	public void showGhost( ){
-		
 	}
 	
 	

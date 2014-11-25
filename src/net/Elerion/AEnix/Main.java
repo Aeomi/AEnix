@@ -5,7 +5,7 @@ import org.newdawn.slick.SlickException;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SlickException {
 		
         try {
             AppGameContainer AEnix = new AppGameContainer( new AEnix( "AEnix" ) );
@@ -15,15 +15,9 @@ public class Main {
             Error.printStackTrace( );
         }
         
-        try {
-            AppGameContainer Menu = new AppGameContainer( new Menu( "Menu" ) );
-            Menu.setDisplayMode( Conf.Menu.Res, Conf.Menu.Res, false );
-           // Menu.start( );
-        } catch ( SlickException Error ){
-            Error.printStackTrace( );
-        }
-		
+       
 		
 	}
 
 }
+

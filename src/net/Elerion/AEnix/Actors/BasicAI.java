@@ -13,15 +13,18 @@ public class BasicAI {
 	}
 	
 	public void moveRnd( ){
-		int rndDir = AMath.rand( 0, 3 );
+		int rndDir = AMath.rand( 0, 4 );
 		switch (rndDir){
-			case(0):{tick.addCmd(this.Actor.moveUp()); break;}
-			case(1):{tick.addCmd(this.Actor.moveDown()); break;}
-			case(2):{tick.addCmd(this.Actor.moveLeft()); break;}
-			case(3):{tick.addCmd(this.Actor.moveRight()); break;}
+			case(1):{
+				tick.addCmd(this.Actor.moveUp());	this.Actor.ghost.moveUp();	break;
+			}
+			case(2):{ tick.addCmd(this.Actor.moveDown());	this.Actor.ghost.moveDown();	break;}
+			case(3):{ tick.addCmd(this.Actor.moveLeft());	this.Actor.ghost.moveLeft();	break;}
+			case(4):{ tick.addCmd(this.Actor.moveRight());	this.Actor.ghost.moveRight();	break;}
 		}
-		
 	}
+	
+	
 	
 	
 	
